@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 个人数字宇宙 - 笔记版</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #1a4d3e 0%, #2d5a4a 50%, #1a4d3e 100%); min-height: 100vh; }
+        
+        /* 星空背景 */
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; width: 3px; height: 3px; background: white; border-radius: 50%; animation: twinkle 3s infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        
+        /* 赛博书房 */
+        .study-room { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        
+        /* 欢迎卡片 */
+        .welcome-card { position: relative; z-index: 10; background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); border-radius: 24px; padding: 50px; text-align: center; color: white; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .welcome-card h1 { font-size: 48px; margin-bottom: 16px; }
+        .welcome-card p { font-size: 18px; opacity: 0.8; margin-bottom: 32px; }
+        
+        /* 按钮 */
+        .btn { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: white; border: none; padding: 16px 40px; border-radius: 30px; font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(34,197,94,0.4); }
+        .btn-secondary { background: rgba(255,255,255,0.2); margin-top: 20px; }
+        
+        /* 导航菜单 */
+        .nav-menu { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; }
+        .nav-btn { background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 12px 24px; border-radius: 30px; cursor: pointer; font-size: 14px; transition: all 0.3s ease; }
+        .nav-btn:hover { background: rgba(255,255,255,0.3); }
+        
+        /* 应用页面 */
+        .app-page { display: none; width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .app-page.active { display: block; }
+        
+        /* 文章列表 */
+        .article-card { background: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+        .article-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .article-title { font-size: 20px; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
+        .article-summary { color: #64748b; font-size: 14px; margin-bottom: 12px; }
+        .article-meta { display: flex; gap: 12px; }
+        .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+        .badge-draft { background: #fef3c7; color: #d97706; }
+        .badge-published { background: #dcfce7; color: #16a34a; }
+        
+        /* 编辑器 */
+        .editor { background: white; border-radius: 16px; padding: 30px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+        .editor-title { width: 100%; font-size: 28px; font-weight: 700; border: none; outline: none; color: #1e293b; margin-bottom: 16px; padding: 0; }
+        .editor-stats { display: flex; gap: 24px; margin-bottom: 16px; padding: 12px 16px; background: #f0fdf4; border-radius: 10px; color: #16a34a; }
+        .editor-textarea { width: 100%; min-height: 300px; padding: 20px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; line-height: 1.8; resize: vertical; outline: none; font-family: inherit; }
+        .editor-textarea:focus { border-color: #22c55e; }
+        
+        /* 文件网格 */
+        .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
+        .file-card { background: white; border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+        .file-icon { font-size: 48px; margin-bottom: 12px; }
+        .file-name { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
+        
+        /* 阅读器 */
+        .reader { background: #fefefe; border-radius: 16px; padding: 40px; max-width: 800px; margin: 0 auto; min-height: 500px; }
+        .reader-content { font-size: 18px; line-height: 2; color: #1e293b; white-space: pre-wrap; }
+        
+        /* 壁纸选择器 */
+        .wallpaper-selector { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; background: rgba(255,255,255,0.2); backdrop-filter: blur(20px); padding: 16px; border-radius: 30px; z-index: 100; }
+        .wallpaper-option { width: 40px; height: 40px; border-radius: 50%; cursor: pointer; border: 3px solid rgba(255,255,255,0.5); transition: all 0.3s ease; }
+        .wallpaper-option:hover { transform: scale(1.15); }
+        .wallpaper-bamboo { background: linear-gradient(135deg, #1a4d3e, #2d5a4a); }
+        .wallpaper-starry { background: linear-gradient(135deg, #1a1a3e, #2d1a4e); }
+        .wallpaper-sunny { background: linear-gradient(135deg, #4a3e2d, #6a5a3d); }
+        .wallpaper-ocean { background: linear-gradient(135deg, #1a3e4d, #2d4a5e); }
+        
+        /* 头部 */
+        .app-header { background: white; padding: 16px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; border-radius: 16px 16px 0 0; margin-bottom: 20px; }
+        .page-title { font-size: 24px; font-weight: 700; color: #1e293b; }
+        .actions { display: flex; gap: 12px; }
+        .btn-small { padding: 8px 20px; font-size: 14px; border-radius: 20px; }
+        .btn-outline { background: white; border: 2px solid #22c55e; color: #22c55e; }
+        .btn-outline:hover { background: #22c55e; color: white; }
+        
+        /* 空状态 */
+        .empty-state { text-align: center; padding: 80px 20px; }
+        .empty-icon { font-size: 64px; margin-bottom: 16px; }
+        .empty-state p { color: #64748b; margin-bottom: 24px; }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="study-room" id="studyRoom">
+        <div class="nav-menu">
+            <button class="nav-btn" onclick="showPage('articles')">📝 文章</button>
+            <button class="nav-btn" onclick="showPage('files')">📁 文件</button>
+            <button class="nav-btn" onclick="showPage('reader')">📖 阅读</button>
+        </div>
+        
+        <div class="welcome-card">
+            <h1>✨ 个人数字宇宙</h1>
+            <p>你的专属写作、阅读、思考空间</p>
+            <button class="btn" onclick="showPage('articles')">🚀 开始使用</button>
+            <button class="btn btn-secondary" onclick="showPage('editor')">✍️ 现在写作</button>
+        </div>
+        
+        <div class="wallpaper-selector">
+            <div class="wallpaper-option wallpaper-bamboo" onclick="changeWallpaper('bamboo')" title="竹林"></div>
+            <div class="wallpaper-option wallpaper-starry" onclick="changeWallpaper('starry')" title="星空"></div>
+            <div class="wallpaper-option wallpaper-sunny" onclick="changeWallpaper('sunny')" title="暖阳"></div>
+            <div class="wallpaper-option wallpaper-ocean" onclick="changeWallpaper('ocean')" title="海洋"></div>
+        </div>
+    </div>
+    
+    <div class="app-page" id="articlesPage">
+        <div class="app-header">
+            <div>
+                <button class="btn btn-outline btn-small" onclick="showPage('home')">← 返回</button>
+                <span class="page-title" style="margin-left: 16px;">📝 我的文章</span>
+            </div>
+            <div class="actions">
+                <button class="btn btn-small" onclick="showPage('editor')">✍️ 写新文章</button>
+            </div>
+        </div>
+        
+        <div class="article-card">
+            <h3 class="article-title">我的第一篇文章</h3>
+            <p class="article-summary">这是一个测试文章，展示如何在数字宇宙中记录你的想法...</p>
+            <div class="article-meta">
+                <span class="badge badge-published">已发布</span>
+                <span style="color: #64748b; font-size: 13px;">2024年5月25日</span>
+            </div>
+        </div>
+        
+        <div class="article-card">
+            <h3 class="article-title">读书笔记：《设计模式》</h3>
+            <p class="article-summary">今天读了《设计模式》这本书，记录一些关键要点...</p>
+            <div class="article-meta">
+                <span class="badge badge-draft">草稿</span>
+                <span style="color: #64748b; font-size: 13px;">2024年5月24日</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="app-page" id="editorPage">
+        <div class="app-header">
+            <div>
+                <button class="btn btn-outline btn-small" onclick="showPage('articles')">← 返回</button>
+                <span class="page-title" style="margin-left: 16px;">✍️ 写作中</span>
+            </div>
+            <div class="actions">
+                <button class="btn btn-outline btn-small" onclick="saveDraft()">💾 存草稿</button>
+                <button class="btn btn-small" onclick="publish()">📤 发布</button>
+            </div>
+        </div>
+        
+        <div class="editor">
+            <input type="text" class="editor-title" placeholder="输入文章标题..." id="articleTitle" value="我的新文章">
+            <div class="editor-stats" id="editorStats">
+                <span>📝 0 字</span>
+                <span>📊 0 字符</span>
+                <span>⏱️ 约 0 分钟</span>
+            </div>
+            <textarea class="editor-textarea" id="articleContent" placeholder="开始写作吧...
+
+在这里记录你的想法、故事或知识..." oninput="updateStats()">
+今天是个美好的一天，我创建了我的个人数字宇宙！
+
+这是一个专门为写作、阅读和思考设计的空间。</textarea>
+        </div>
+    </div>
+    
+    <div class="app-page" id="filesPage">
+        <div class="app-header">
+            <div>
+                <button class="btn btn-outline btn-small" onclick="showPage('home')">← 返回</button>
+                <span class="page-title" style="margin-left: 16px;">📁 我的文件</span>
+            </div>
+            <div class="actions">
+                <button class="btn btn-small">📤 上传文件</button>
+            </div>
+        </div>
+        
+        <div class="file-grid">
+            <div class="file-card">
+                <div class="file-icon">📝</div>
+                <h4 class="file-name">笔记1.txt</h4>
+                <p style="color: #64748b; font-size: 12px;">2024-05-25</p>
+                <button class="btn btn-outline btn-small" style="margin-top: 12px; width: 100%;" onclick="showPage('reader')">阅读</button>
+            </div>
+            <div class="file-card">
+                <div class="file-icon">📄</div>
+                <h4 class="file-name">文档.md</h4>
+                <p style="color: #64748b; font-size: 12px;">2024-05-24</p>
+                <button class="btn btn-outline btn-small" style="margin-top: 12px; width: 100%;" onclick="showPage('reader')">阅读</button>
+            </div>
+            <div class="file-card">
+                <div class="file-icon">📚</div>
+                <h4 class="file-name">电子书.epub</h4>
+                <p style="color: #64748b; font-size: 12px;">2024-05-23</p>
+                <button class="btn btn-outline btn-small" style="margin-top: 12px; width: 100%;" onclick="showPage('reader')">阅读</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="app-page" id="readerPage">
+        <div class="app-header">
+            <div>
+                <button class="btn btn-outline btn-small" onclick="showPage('files')">← 返回</button>
+                <span class="page-title" style="margin-left: 16px;">📖 阅读中</span>
+            </div>
+            <div class="actions">
+                <button class="btn btn-outline btn-small">A-</button>
+                <button class="btn btn-outline btn-small">A+</button>
+                <button class="btn btn-outline btn-small">🌓</button>
+            </div>
+        </div>
+        
+        <div class="reader">
+            <h2 style="margin-bottom: 24px; color: #1e293b;">第一章 开始</h2>
+            <div class="reader-content">这是一个示例文本，展示电子书阅读器的效果。
+
+你可以在这里阅读你的笔记、文档或电子书。
+
+支持调节字体大小和切换阅读主题。
+
+---
+
+继续阅读下一页...
+</div>
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 40px;">
+                <button class="btn btn-outline btn-small">◀ 上一页</button>
+                <span style="color: #64748b;">1 / 5</span>
+                <button class="btn btn-outline btn-small">下一页 ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 生成星星
+        function generateStars() {
+            const stars = document.getElementById('stars');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                stars.appendChild(star);
+            }
+        }
+        
+        // 切换壁纸
+        const wallpapers = {
+            bamboo: 'linear-gradient(135deg, #1a4d3e 0%, #2d5a4a 50%, #1a4d3e 100%)',
+            starry: 'linear-gradient(135deg, #1a1a3e 0%, #2d1a4e 50%, #1a1a3e 100%)',
+            sunny: 'linear-gradient(135deg, #4a3e2d 0%, #6a5a3d 50%, #4a3e2d 100%)',
+            ocean: 'linear-gradient(135deg, #1a3e4d 0%, #2d4a5e 50%, #1a3e4d 100%)'
+        };
+        
+        function changeWallpaper(name) {
+            document.body.style.background = wallpapers[name];
+        }
+        
+        // 页面切换
+        function showPage(page) {
+            document.getElementById('studyRoom').style.display = page === 'home' ? 'flex' : 'none';
+            document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
+            
+            if (page === 'articles') document.getElementById('articlesPage').classList.add('active');
+            if (page === 'editor') document.getElementById('editorPage').classList.add('active');
+            if (page === 'files') document.getElementById('filesPage').classList.add('active');
+            if (page === 'reader') document.getElementById('readerPage').classList.add('active');
+            
+            if (page !== 'home') {
+                document.body.style.background = 'linear-gradient(135deg, #f5f5f5 0%, #f0fdf4 50%, #f5f5f5 100%)';
+            } else {
+                document.body.style.background = wallpapers['bamboo'];
+            }
+        }
+        
+        // 更新统计
+        function updateStats() {
+            const content = document.getElementById('articleContent').value;
+            const chars = content.length;
+            const words = (content.match(/[\u4e00-\u9fa5]/g) || []).length + content.replace(/[\u4e00-\u9fa5]/g, ' ').split(/\s+/).filter(Boolean).length;
+            const minutes = Math.max(1, Math.ceil(words / 300));
+            
+            document.getElementById('editorStats').innerHTML = `
+                <span>📝 ${words} 字</span>
+                <span>📊 ${chars} 字符</span>
+                <span>⏱️ 约 ${minutes} 分钟</span>
+            `;
+        }
+        
+        function saveDraft() { alert('✅ 草稿已保存！'); }
+        function publish() { alert('🎉 文章已发布！'); showPage('articles'); }
+        
+        // 初始化
+        generateStars();
+        updateStats();
+    </script>
+</body>
+</html>
