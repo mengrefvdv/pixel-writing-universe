@@ -1,0 +1,221 @@
+.tools-container {
+  padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.tools-header {
+  margin-bottom: 30px;
+}
+
+.tools-title {
+  color: #e94560;
+  font-size: 28px;
+  margin: 0;
+}
+
+.tools-subtitle {
+  color: #4ecdc4;
+  margin: 0;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.tool-card {
+  background: #16213e;
+  border: 4px solid #0f3460;
+  padding: 25px;
+  transition: all 0.3s;
+}
+
+.tool-card:hover {
+  border-color: #e94560;
+  transform: translateY(-3px);
+}
+
+.tool-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.tool-title {
+  color: #e94560;
+  font-size: 18px;
+  margin: 0 0 10px;
+}
+
+.tool-description {
+  color: #4ecdc4;
+  font-size: 14px;
+  margin: 0 0 20px;
+}
+
+.tool-content {
+  margin-top: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  color: #e94560;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+  width: 100%;
+  background: #0f3460;
+  border: 3px solid #e94560;
+  color: #e94560;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.input-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.tool-btn {
+  background: #e94560;
+  border: 3px solid #e94560;
+  color: #1a1a2e;
+  padding: 12px 25px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #0f3460;
+  transition: all 0.1s;
+}
+
+.tool-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #0f3460;
+}
+
+.tool-btn-secondary {
+  background: #0f3460;
+  color: #e94560;
+}
+
+.result-container {
+  background: #0f3460;
+  border: 2px solid #e94560;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.result-title {
+  color: #e94560;
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.result-content {
+  color: #4ecdc4;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.name-generator-result {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffeaa7;
+}
+
+.word-count-display {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.count-item {
+  background: #0f3460;
+  padding: 15px;
+  text-align: center;
+  flex: 1;
+}
+
+.count-label {
+  color: #e94560;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.count-value {
+  color: #4ecdc4;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.character-counter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.character-counter span {
+  color: #ffeaa7;
+  font-size: 14px;
+}
+
+.github-search-results {
+  margin-top: 15px;
+}
+
+.search-result-item {
+  background: #0f3460;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-left: 4px solid #e94560;
+}
+
+.search-result-title {
+  color: #e94560;
+  font-size: 14px;
+  margin: 0 0 5px;
+}
+
+.search-result-desc {
+  color: #4ecdc4;
+  font-size: 12px;
+  margin: 0 0 5px;
+}
+
+.search-result-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 11px;
+  color: #ffeaa7;
+}
+
+.loading-spinner {
+  text-align: center;
+  color: #e94560;
+  padding: 20px;
+}
+
+.copy-btn {
+  background: #0f3460;
+  border: 2px solid #4ecdc4;
+  color: #4ecdc4;
+  padding: 8px 15px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.copy-btn:hover {
+  background: #4ecdc4;
+  color: #1a1a2e;
+}

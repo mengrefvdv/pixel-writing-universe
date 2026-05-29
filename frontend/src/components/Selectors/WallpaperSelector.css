@@ -1,0 +1,87 @@
+.wallpaper-selector {
+  padding: 1rem;
+}
+
+.selector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.selector-header h3 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.random-btn {
+  padding: 0.5rem 1rem;
+  background: var(--accent-gradient);
+  border: 2px solid var(--accent-color);
+  border-radius: var(--radius-sm);
+  color: var(--bg-primary);
+  cursor: pointer;
+  font-family: var(--font-pixel);
+  font-size: 0.8rem;
+  transition: var(--transition-all);
+}
+
+.random-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.wallpaper-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.wallpaper-item {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition-all);
+  border: 3px solid var(--border-color);
+}
+
+.wallpaper-item:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-soft);
+}
+
+.wallpaper-item.active {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 20px rgba(78, 205, 196, 0.4);
+}
+
+.wallpaper-preview {
+  width: 100%;
+  height: 120px;
+  background-color: var(--bg-secondary);
+}
+
+.wallpaper-info {
+  padding: 0.5rem;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.wallpaper-name {
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.wallpaper-category {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}

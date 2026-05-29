@@ -1,0 +1,235 @@
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #faf5e6 0%, #f0eade 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+.loading-content {
+  text-align: center;
+  max-width: 500px;
+  padding: 40px;
+  position: relative;
+}
+
+.loading-logo {
+  margin-bottom: 60px;
+}
+
+.logo-icon {
+  font-size: 100px;
+  margin-bottom: 20px;
+  animation: logoFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 10px 30px rgba(244, 208, 63, 0.5));
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.loading-logo h1 {
+  font-size: 42px;
+  color: #8b6914;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-shadow: 3px 3px 0 #d4c4a8;
+  animation: titleGlow 2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 3px 3px 0 #d4c4a8, 0 0 20px rgba(244, 208, 63, 0.3);
+  }
+  50% {
+    text-shadow: 3px 3px 0 #d4c4a8, 0 0 40px rgba(244, 208, 63, 0.6);
+  }
+}
+
+.loading-logo p {
+  font-size: 14px;
+  color: #a08060;
+  letter-spacing: 3px;
+}
+
+.loading-progress-container {
+  margin-bottom: 30px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background: #d4c4a8;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 4px solid #b8a890;
+  box-shadow: 
+    4px 4px 0 #b8a890,
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+  margin-bottom: 15px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4ecdc4 0%, #44a08d 50%, #f4d03f 100%);
+  border-radius: 6px;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.progress-text {
+  font-size: 16px;
+  font-weight: bold;
+  color: #8b6914;
+}
+
+.loading-message {
+  font-size: 18px;
+  color: #8b6914;
+  margin-bottom: 40px;
+  min-height: 27px;
+  animation: messagePulse 2s ease-in-out infinite;
+}
+
+@keyframes messagePulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.loading-tips {
+  background: rgba(250, 245, 230, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  border: 3px solid #d4c4a8;
+  margin-bottom: 40px;
+}
+
+.loading-tips p {
+  font-size: 14px;
+  color: #8b6914;
+  line-height: 1.6;
+}
+
+.loading-animation {
+  position: relative;
+  height: 100px;
+}
+
+.floating-elements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.floating-elements span {
+  position: absolute;
+  font-size: 32px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.float-1 {
+  left: 10%;
+  top: 20%;
+  animation-delay: 0s;
+}
+
+.float-2 {
+  left: 30%;
+  top: 60%;
+  animation-delay: 1s;
+}
+
+.float-3 {
+  left: 60%;
+  top: 30%;
+  animation-delay: 2s;
+}
+
+.float-4 {
+  left: 80%;
+  top: 50%;
+  animation-delay: 0.5s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translateY(-20px) rotate(10deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-10px) rotate(-5deg);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(-30px) rotate(5deg);
+    opacity: 1;
+  }
+}
+
+/* 背景动画 */
+.loading-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(78, 205, 196, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(244, 208, 63, 0.1) 0%, transparent 50%);
+  animation: backgroundPulse 5s ease-in-out infinite;
+}
+
+@keyframes backgroundPulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}

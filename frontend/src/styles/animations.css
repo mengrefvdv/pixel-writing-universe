@@ -1,0 +1,730 @@
+/* ============================================
+   Micro Interactions - 微交互动画库
+   ============================================ */
+
+/* ============================================
+   1. Button Interactions - 按钮微交互
+   ============================================ */
+
+/* 按钮弹跳效果 */
+.pixel-btn {
+  transition: 
+    transform var(--duration-normal) var(--ease-spring),
+    box-shadow var(--duration-normal) var(--ease-soft),
+    filter var(--duration-fast) var(--ease-soft);
+}
+
+.pixel-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    var(--space-md) var(--space-md) 0 var(--border-dark),
+    0 0 30px var(--glow-primary);
+}
+
+.pixel-btn:active {
+  transform: translateY(2px);
+  box-shadow: 
+    0 0 0 var(--border-dark),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* 按钮涟漪效果 */
+.pixel-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: 
+    width var(--duration-slow) var(--ease-out-expo),
+    height var(--duration-slow) var(--ease-out-expo),
+    opacity var(--duration-slow) var(--ease-soft);
+  pointer-events: none;
+}
+
+.pixel-btn.clicked::before {
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+}
+
+/* ============================================
+   2. Hover Glow Effects - 悬浮发光
+   ============================================ */
+
+/* 基础发光 */
+.hover-glow {
+  transition: 
+    box-shadow var(--duration-normal) var(--ease-soft),
+    transform var(--duration-normal) var(--ease-soft);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px var(--glow-primary);
+  transform: translateY(-3px);
+}
+
+/* 柔和发光 */
+.hover-glow-soft {
+  transition: all var(--duration-normal) var(--ease-soft);
+}
+
+.hover-glow-soft:hover {
+  box-shadow: 
+    0 0 20px var(--glow-accent),
+    0 0 40px rgba(244, 208, 63, 0.2);
+}
+
+/* 彩色发光 */
+.hover-glow-accent:hover {
+  box-shadow: 
+    0 0 20px var(--glow-secondary),
+    0 0 40px var(--glow-primary);
+}
+
+/* ============================================
+   3. Card Interactions - 卡片微交互
+   ============================================ */
+
+/* 卡片悬浮 */
+.card-hover {
+  transition: 
+    transform var(--duration-normal) var(--ease-spring),
+    box-shadow var(--duration-normal) var(--ease-soft);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    var(--space-lg) var(--space-lg) 0 var(--border-dark),
+    0 0 40px var(--glow-accent);
+}
+
+/* 卡片点击 */
+.card-click:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+/* 卡片展开 */
+.card-expand {
+  transition: all var(--duration-slow) var(--ease-out-expo);
+}
+
+.card-expand.expanded {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   4. Navigation Transitions - 导航切换动画
+   ============================================ */
+
+/* 页面滑入 */
+.page-enter {
+  animation: pageSlideIn var(--duration-slow) var(--ease-out-expo);
+}
+
+@keyframes pageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 页面滑出 */
+.page-exit {
+  animation: pageSlideOut var(--duration-normal) var(--ease-soft);
+}
+
+@keyframes pageSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+}
+
+/* 淡入淡出 */
+.fade-enter {
+  animation: fadeIn var(--duration-normal) var(--ease-soft);
+}
+
+.fade-exit {
+  animation: fadeOut var(--duration-normal) var(--ease-soft);
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* 缩放进入 */
+.scale-enter {
+  animation: scaleIn var(--duration-slow) var(--ease-spring);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 弹性进入 */
+.bounce-enter {
+  animation: bounceIn var(--duration-slow) var(--ease-spring);
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================
+   5. Celebration Effects - 庆祝反馈
+   ============================================ */
+
+/* 粒子效果容器 */
+.celebration-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* 庆祝粒子 */
+.celebration-particle {
+  position: absolute;
+  animation: celebrationFall var(--duration-mega-slow) var(--ease-out-expo) forwards;
+}
+
+@keyframes celebrationFall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* 星星闪烁 */
+.star-burst {
+  position: absolute;
+  animation: starBurst var(--duration-very-slow) var(--ease-out-expo);
+}
+
+@keyframes starBurst {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* 庆祝文字 */
+.celebration-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  font-weight: bold;
+  color: var(--primary);
+  text-shadow: 
+    2px 2px 0 var(--primary-dark),
+    4px 4px 0 var(--border-dark),
+    0 0 30px var(--glow-primary);
+  animation: celebrationText var(--duration-mega-slow) var(--ease-spring);
+  pointer-events: none;
+  z-index: 10000;
+}
+
+@keyframes celebrationText {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  30% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  80% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -100%) scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* XP增加特效 */
+.xp-gain {
+  position: fixed;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--glow-secondary);
+  animation: xpFloat var(--duration-slow) var(--ease-out-expo);
+  pointer-events: none;
+  z-index: 10001;
+}
+
+@keyframes xpFloat {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+
+/* 升级特效 */
+.level-up-effect {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow-primary) 0%, transparent 70%);
+  animation: levelUpPulse var(--duration-mega-slow) var(--ease-out-expo);
+  pointer-events: none;
+  z-index: 9998;
+}
+
+@keyframes levelUpPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+/* 成就解锁特效 */
+.achievement-unlock {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  padding: var(--space-lg) var(--space-2xl);
+  border-radius: var(--radius-lg);
+  border: var(--border-lg) solid var(--border-dark);
+  box-shadow: 
+    var(--space-lg) var(--space-lg) 0 var(--border-dark),
+    0 0 50px var(--glow-primary);
+  animation: achievementSlide var(--duration-slow) var(--ease-spring);
+  z-index: 10000;
+  pointer-events: none;
+}
+
+@keyframes achievementSlide {
+  0% {
+    transform: translateX(-50%) translateY(-100px);
+    opacity: 0;
+  }
+  20% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50px);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   6. Breathing Effects - 呼吸动画
+   ============================================ */
+
+/* 缓慢呼吸 */
+.breathing {
+  animation: breathe var(--duration-mega-slow) var(--ease-in-out-soft) infinite;
+}
+
+/* 快速呼吸 */
+.breathing-fast {
+  animation: breathe var(--duration-slow) var(--ease-in-out-soft) infinite;
+}
+
+/* 脉冲 */
+.pulse {
+  animation: pulse var(--duration-normal) var(--ease-soft) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* ============================================
+   7. Floating Effects - 漂浮动画
+   ============================================ */
+
+/* 上下漂浮 */
+.floating {
+  animation: float var(--duration-slow) var(--ease-in-out-soft) infinite;
+}
+
+.floating-slow {
+  animation: float var(--duration-mega-slow) var(--ease-in-out-soft) infinite;
+}
+
+/* 旋转漂浮 */
+.floating-rotate {
+  animation: floatRotate var(--duration-slow) var(--ease-in-out-soft) infinite;
+}
+
+@keyframes floatRotate {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+}
+
+/* ============================================
+   8. Typing Effects - 打字效果
+   ============================================ */
+
+/* 光标闪烁 */
+.cursor-blink {
+  animation: blink var(--duration-normal) var(--ease-soft) infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* 打字效果 */
+.typing-effect {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing var(--duration-slow) steps(40) forwards;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* ============================================
+   9. Shimmer Effects - 闪光效果
+   ============================================ */
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer var(--duration-slow) var(--ease-soft) infinite;
+}
+
+@keyframes shimmer {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+/* ============================================
+   10. Loading States - 加载状态
+   ============================================ */
+
+/* 加载旋转 */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin var(--duration-slow) linear infinite;
+}
+
+/* 加载点 */
+.loading-dots {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.loading-dots span {
+  width: 10px;
+  height: 10px;
+  background: var(--primary);
+  border-radius: 50%;
+  animation: loadingDot var(--duration-slow) var(--ease-soft) infinite;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loadingDot {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   11. Notification Effects - 通知动画
+   ============================================ */
+
+/* 通知滑入 */
+.notification-enter {
+  animation: notificationSlide var(--duration-normal) var(--ease-spring);
+}
+
+@keyframes notificationSlide {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* 通知滑出 */
+.notification-exit {
+  animation: notificationSlideOut var(--duration-normal) var(--ease-soft);
+}
+
+@keyframes notificationSlideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   12. Interactive Feedback - 交互反馈
+   ============================================ */
+
+/* 点击涟漪 */
+.click-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.click-ripple::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  transform: scale(0);
+  opacity: 0;
+  transition: 
+    transform var(--duration-slow) var(--ease-out-expo),
+    opacity var(--duration-fast) var(--ease-soft);
+  pointer-events: none;
+}
+
+.click-ripple:active::after {
+  transform: scale(2);
+  opacity: 1;
+}
+
+/* 拖拽效果 */
+.dragging {
+  opacity: 0.7;
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px var(--shadow-dark);
+  cursor: grabbing !important;
+  z-index: 1000;
+}
+
+/* 按下效果 */
+.pressed {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+/* 选中效果 */
+.selected {
+  border-color: var(--primary) !important;
+  background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(244, 208, 63, 0.1) 100%) !important;
+  box-shadow: 
+    var(--space-sm) var(--space-sm) 0 var(--border-dark),
+    0 0 20px var(--glow-primary) !important;
+}
+
+/* ============================================
+   13. Scroll Animations - 滚动动画
+   ============================================ */
+
+/* 淡入上滑 */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 
+    opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 延迟 */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+
+/* ============================================
+   14. Mood Effects - 情绪效果
+   ============================================ */
+
+/* 温暖光晕 */
+.warm-glow {
+  animation: warmGlow var(--duration-mega-slow) var(--ease-in-out-soft) infinite;
+}
+
+@keyframes warmGlow {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(244, 208, 63, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 60px rgba(244, 208, 63, 0.6);
+  }
+}
+
+/* 治愈脉冲 */
+.healing-pulse {
+  animation: healingPulse var(--duration-slow) var(--ease-soft) infinite;
+}
+
+@keyframes healingPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px var(--glow-secondary);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px var(--glow-secondary);
+  }
+}
+
+/* 安静呼吸 */
+.quiet-breathe {
+  animation: quietBreathe var(--duration-mega-slow) var(--ease-in-out-soft) infinite;
+}
+
+@keyframes quietBreathe {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}

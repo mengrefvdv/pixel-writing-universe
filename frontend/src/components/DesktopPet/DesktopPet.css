@@ -1,0 +1,245 @@
+.desktop-pet {
+  position: fixed;
+  z-index: 9999;
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.1s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+.desktop-pet:hover {
+  transform: scale(1.1);
+}
+
+.desktop-pet.dragging {
+  cursor: grabbing;
+  animation: none;
+  opacity: 0.8;
+  z-index: 10000;
+}
+
+.desktop-pet.happy {
+  animation: bounce 0.5s ease infinite;
+}
+
+.desktop-pet.blinking {
+  animation: blink 0.3s ease;
+}
+
+.pet-shadow {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  filter: blur(5px);
+}
+
+.pet-emoji {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 4px 8px rgba(233, 69, 96, 0.4);
+}
+
+.pet-name {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #e94560;
+  background: rgba(26, 26, 46, 0.9);
+  padding: 4px 12px;
+  border: 2px solid #e94560;
+  white-space: nowrap;
+  font-family: 'Courier New', monospace;
+}
+
+.happy-particles {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: sparkle 0.5s ease-out forwards;
+  font-size: 20px;
+}
+
+.pet-info-popup {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  background: #1a1a2e;
+  border: 4px solid #e94560;
+  padding: 15px;
+  box-shadow: 4px 4px 0 #e94560;
+  z-index: 9999;
+  animation: popIn 0.2s ease;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e94560;
+}
+
+.info-header h4 {
+  margin: 0;
+  color: #e94560;
+  font-size: 14px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #e94560;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.close-btn:hover {
+  color: #ff6b9d;
+}
+
+.info-content {
+  color: #e94560;
+  font-family: 'Courier New', monospace;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed #0f3460;
+}
+
+.info-label {
+  color: #ffeaa7;
+  font-size: 12px;
+}
+
+.info-value {
+  color: #4ecdc4;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.mini-progress {
+  flex: 1;
+  height: 12px;
+  background: #0f3460;
+  border: 2px solid #e94560;
+  margin-left: 10px;
+}
+
+.mini-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e94560, #4ecdc4);
+  transition: width 0.5s ease;
+}
+
+.info-tip {
+  margin-top: 10px;
+  padding: 10px;
+  background: #16213e;
+  border: 2px solid #0f3460;
+  font-size: 11px;
+  color: #ffeaa7;
+}
+
+.pet-instruction {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(26, 26, 46, 0.95);
+  border: 3px solid #e94560;
+  padding: 10px 20px;
+  color: #e94560;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  z-index: 9998;
+  animation: fadeInUp 1s ease;
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-15px); 
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { 
+    transform: translateY(0) scale(1); 
+  }
+  50% { 
+    transform: translateY(-20px) scale(1.1); 
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) scale(1.5);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-pet {
+    font-size: 1.5rem;
+  }
+  
+  .pet-info-popup {
+    min-width: 160px;
+  }
+  
+  .pet-instruction {
+    font-size: 10px;
+    padding: 8px 15px;
+  }
+}

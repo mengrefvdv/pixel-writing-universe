@@ -1,0 +1,245 @@
+.login-container,
+.register-container {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.logo-icon {
+  font-size: 100px;
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+.pixel-title {
+  font-family: 'Courier New', monospace;
+  font-size: 48px;
+  color: #e94560;
+  margin: 10px 0;
+  text-shadow: 
+    0 0 20px rgba(233, 69, 96, 0.5),
+    0 4px 0 #ff6b9d,
+    0 8px 0 rgba(0, 0, 0, 0.3);
+  letter-spacing: 4px;
+}
+
+.pixel-subtitle {
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  color: #ffeaa7;
+  letter-spacing: 8px;
+  margin-top: 10px;
+}
+
+.login-form,
+.register-form {
+  width: 100%;
+  max-width: 450px;
+  background: rgba(22, 33, 62, 0.9);
+  border: 6px solid #e94560;
+  padding: 40px;
+  box-shadow: 
+    0 0 30px rgba(233, 69, 96, 0.3),
+    inset 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.pixel-label {
+  display: block;
+  color: #e94560;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.pixel-input {
+  width: 100%;
+  background: #0f3460;
+  border: 4px solid #e94560;
+  color: #e94560;
+  padding: 15px;
+  font-size: 16px;
+  font-family: 'Courier New', monospace;
+  outline: none;
+  box-shadow: 
+    4px 4px 0 #e94560,
+    inset 2px 2px 0 rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
+}
+
+.pixel-input::placeholder {
+  color: rgba(233, 69, 96, 0.5);
+}
+
+.pixel-input:focus {
+  background: #16213e;
+  box-shadow: 
+    6px 6px 0 #ff6b9d,
+    inset 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.error-message {
+  background: rgba(255, 107, 107, 0.2);
+  border: 3px solid #ff6b6b;
+  color: #ff6b6b;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.pixel-btn.large {
+  width: 100%;
+  padding: 18px 40px;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.pixel-btn.primary {
+  background: #e94560;
+  border-color: #e94560;
+  color: #1a1a2e;
+  font-weight: bold;
+}
+
+.pixel-btn.primary:hover:not(:disabled) {
+  background: #ff6b9d;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #e94560;
+}
+
+.pixel-btn.secondary {
+  background: #0f3460;
+  border-color: #4ecdc4;
+  color: #4ecdc4;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.pixel-btn.secondary:hover:not(:disabled) {
+  background: #4ecdc4;
+  color: #1a1a2e;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #4ecdc4;
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 3px dashed #0f3460;
+}
+
+.form-footer p {
+  color: #ffeaa7;
+  font-family: 'Courier New', monospace;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.login-tips {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tip {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #ffeaa7;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.tip span:first-child {
+  font-size: 24px;
+}
+
+/* Register specific */
+.register-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.register-header .logo-icon {
+  font-size: 80px;
+}
+
+.register-header h1 {
+  font-family: 'Courier New', monospace;
+  font-size: 36px;
+  color: #e94560;
+  margin: 15px 0;
+  text-shadow: 
+    0 0 20px rgba(233, 69, 96, 0.5),
+    0 4px 0 #ff6b9d;
+}
+
+.register-header p {
+  color: #ffeaa7;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+}
+
+/* Back button */
+.auth-screen {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: rgba(26, 26, 46, 0.9);
+  border: 3px solid #e94560;
+  color: #e94560;
+  padding: 10px 20px;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background: #e94560;
+  color: #1a1a2e;
+  transform: translateX(-3px);
+}
+
+@media (max-width: 768px) {
+  .pixel-title {
+    font-size: 36px;
+  }
+  
+  .login-form,
+  .register-form {
+    padding: 30px 20px;
+  }
+  
+  .logo-icon {
+    font-size: 80px;
+  }
+}
